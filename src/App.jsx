@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import './styles/estilos.css';
-import './styles/layout.css';
+import './styles/Layout.css';
 
 const App = () => {
   return (
