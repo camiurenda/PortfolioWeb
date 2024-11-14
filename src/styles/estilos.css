@@ -446,10 +446,10 @@ body {
 
 .cv-perfil {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 2rem;
+  padding: 2rem;
   margin-bottom: 2rem;
-  padding: 1rem;
   background: rgba(22, 27, 34, 0.6);
   border-radius: 12px;
   border: 1px solid var(--color-borde);
@@ -457,7 +457,6 @@ body {
 
 .cv-avatar-container {
   flex-shrink: 0;
-  position: relative;
 }
 
 .cv-avatar {
@@ -476,8 +475,9 @@ body {
 
 .cv-info-principal {
   flex: 1;
-  text-align: left;
+  min-width: 0; /* Previene desbordamiento en flex items */
 }
+
 
 .cv-info-principal h1 {
   font-size: 2.5rem;
@@ -532,6 +532,7 @@ body {
   gap: 0.75rem;
   margin: 1rem 0;
 }
+
 
 .cv-titulo-badge {
   display: flex;
@@ -591,47 +592,55 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .cv-contenedor {
+    padding: 0.5rem;
+  }
+
+  .cv-perfil {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .cv-avatar-container {
+    width: 150px;
+  }
+
+  .cv-avatar {
+    width: 150px;
+    height: 150px;
+  }
+
   .cv-titulos {
     justify-content: center;
   }
-  
+
   .cv-titulo-badge {
-    flex-basis: calc(50% - 0.75rem);
-    justify-content: center;
+    min-width: 150px;
+  }
+
+  .cv-descripcion {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .cv-titulo-badge {
-    flex-basis: 100%;
+  .cv-perfil {
+    padding: 1rem;
   }
-}
 
-/* Ajuste para la transición entre secciones */
-.cv-titulo-badge {
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
+  .cv-info-principal h1 {
+    font-size: 2rem;
+  }
 
-/* Efecto de brillo en hover */
-.cv-titulo-badge::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    45deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: inherit;
-}
+  .cv-titulo-badge {
+    min-width: 100%;
+    max-width: 100%;
+  }
 
-.cv-titulo-badge:hover::after {
-  opacity: 1;
+  .cv-descripcion {
+    font-size: 0.9rem;
+  }
 }

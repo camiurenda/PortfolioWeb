@@ -116,13 +116,13 @@ const Home = () => {
     ],
     habilidades: {
       tecnicas: [
-        { emoji: "⚛️", nombre: "React.js" },
-        { emoji: "🟢", nombre: "Node.js" },
-        { emoji: "🌐", nombre: "JavaScript/TypeScript" },
-        { emoji: "🎨", nombre: "HTML5/CSS3" },
-        { emoji: "🗄️", nombre: "MongoDB" },
-        { emoji: "📊", nombre: "Crystal Reports" },
-        { emoji: "🔧", nombre: "Genexus 18" }
+        { emoji: "⚛️", nombre: "React.js: Básico" },
+        { emoji: "🟢", nombre: "Node.js: Básico" },
+        { emoji: "🌐", nombre: "JavaScript/TypeScript: Básico" },
+        { emoji: "🎨", nombre: "HTML5/CSS3: Intermedio" },
+        { emoji: "🗄️", nombre: "MongoDB: Básico" },
+        { emoji: "📊", nombre: "Crystal Reports: Avanzado" },
+        { emoji: "🔧", nombre: "Genexus 18: Intermedio" }
       ],
       blandas: [
         { emoji: "👥", nombre: "Trabajo en equipo" },
