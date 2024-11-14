@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Cliente HTTP configurado para la API de GitHub
 const clienteGithub = axios.create({
   baseURL: 'https://api.github.com',
   headers: {
@@ -8,6 +9,7 @@ const clienteGithub = axios.create({
   }
 });
 
+// Configura el token de autenticación para las peticiones
 export const configurarToken = (token) => {
   if (token) {
     clienteGithub.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -17,16 +19,17 @@ export const configurarToken = (token) => {
 };
 
 export const githubServicio = {
+  // Obtiene información detallada de un usuario de GitHub
   async obtenerUsuario(nombreUsuario) {
     try {
       const { data } = await clienteGithub.get(`/users/${nombreUsuario}`);
+      // Extrae y retorna solo los campos necesarios
       return {
         avatar_url: data.avatar_url,
         name: data.name,
         bio: data.bio,
         location: data.location,
         blog: data.blog,
-        twitter_username: data.twitter_username,
         public_repos: data.public_repos,
         followers: data.followers,
         following: data.following
@@ -37,8 +40,10 @@ export const githubServicio = {
     }
   },
 
+  // Obtiene y procesa los repositorios del usuario
   async obtenerRepositorios(nombreUsuario) {
     try {
+      // Obtiene repositorios ordenados por última actualización
       const { data } = await clienteGithub.get(`/users/${nombreUsuario}/repos`, {
         params: {
           sort: 'updated',
@@ -46,11 +51,13 @@ export const githubServicio = {
         }
       });
 
+      // Procesa cada repositorio para obtener información adicional
       const repositorios = await Promise.all(
         data.map(async (repo) => {
           let readme = null;
           let paginaDespliegue = null;
 
+          // Intenta obtener el README del repositorio
           try {
             const readmeResponse = await clienteGithub.get(
               `/repos/${nombreUsuario}/${repo.name}/readme`,
@@ -65,6 +72,7 @@ export const githubServicio = {
             console.log(`No se encontró README para ${repo.name}`);
           }
 
+          // Intenta obtener la URL de despliegue (GitHub Pages o homepage)
           try {
             const pagesResponse = await clienteGithub.get(
               `/repos/${nombreUsuario}/${repo.name}/pages`
@@ -76,6 +84,7 @@ export const githubServicio = {
             }
           }
 
+          // Construye y retorna el objeto con la información procesada
           return {
             id: repo.id,
             nombre: repo.name,
