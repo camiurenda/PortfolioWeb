@@ -70,6 +70,10 @@ const Home = () => {
             texto: "Implementación de interfaces modernas y responsivas usando WorkWithPlus"
           },
           {
+            emoji: "🖥️",
+            texto: "Implementación del 1er sistema de asistencia al equipo de soporte potenciado por IA"
+          },//comentario
+          {
             emoji: "🤝",
             texto: "Destacada asistencia y capacitación sobre el ERP a clientes."
           }
