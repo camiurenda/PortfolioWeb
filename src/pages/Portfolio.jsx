@@ -4,9 +4,13 @@ import { configurarToken } from '../services/github.services';
 import ReactMarkdown from 'react-markdown';
 
 const Portfolio = () => {
+  // Usuario de GitHub cuyo portfolio se mostrará
   const nombreUsuario = 'camiurenda';
+  
+  // Estado para controlar qué READMEs están expandidos
   const [readmeExpandido, setReadmeExpandido] = useState({});
   
+  // Configura el token de GitHub al montar el componente
   useEffect(() => {
     const token = import.meta.env.VITE_GITHUB_TOKEN;
     if (token) {
@@ -14,8 +18,10 @@ const Portfolio = () => {
     }
   }, []);
 
+  // Obtiene los repositorios usando el hook personalizado
   const { repositorios, cargando, error } = useGithub(nombreUsuario);
 
+  // Función para alternar la expansión de los READMEs
   const toggleReadme = (repoId) => {
     setReadmeExpandido(prev => ({
       ...prev,
@@ -23,6 +29,7 @@ const Portfolio = () => {
     }));
   };
 
+  // Manejo de estado de error
   if (error) {
     return (
       <div className="contenedor">
@@ -43,14 +50,17 @@ const Portfolio = () => {
       </header>
       
       <main className="principal">
+        {/* Muestra un spinner mientras se cargan los datos */}
         {cargando ? (
           <div className="cargando">
             <div className="spinner" />
           </div>
         ) : (
+          // Grid de tarjetas de repositorios
           <div className="grid-repositorios">
             {repositorios.map(repo => (
               <article key={repo.id} className="tarjeta">
+                {/* Encabezado de la tarjeta con título y estado privado */}
                 <div className="tarjeta-encabezado">
                   <h2 className="tarjeta-titulo">
                     <a href={repo.url} target="_blank" rel="noopener noreferrer">
@@ -60,6 +70,7 @@ const Portfolio = () => {
                   </h2>
                 </div>
 
+                {/* Estadísticas y enlaces del repositorio */}
                 <div className="tarjeta-estadisticas">
                   {repo.tecnologiaPrincipal && (
                     <span className="tarjeta-tecnologia">
@@ -68,6 +79,7 @@ const Portfolio = () => {
                   )}
                   <span title="Estrellas">⭐ {repo.estrellas}</span>
                   <span title="Forks">🍴 {repo.forks}</span>
+                  {/* Enlace a la demo si existe */}
                   {repo.urlDespliegue && (
                     <a 
                       href={repo.urlDespliegue}
@@ -81,6 +93,7 @@ const Portfolio = () => {
                   )}
                 </div>
 
+                {/* Sección del README con expansión/contracción */}
                 {repo.readme && (
                   <div className="tarjeta-readme">
                     <div className={`readme-contenido ${readmeExpandido[repo.id] ? 'expandido' : ''}`}>
