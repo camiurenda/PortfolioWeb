@@ -194,9 +194,11 @@ body {
 
 /* Estilos del CV */
 .cv-contenedor {
-  max-width: min(90vw, var(--max-ancho));
-  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
   padding: 1rem;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 .cv-encabezado {
@@ -446,10 +448,10 @@ body {
 
 .cv-perfil {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 2rem;
-  padding: 2rem;
   margin-bottom: 2rem;
+  padding: 1rem;
   background: rgba(22, 27, 34, 0.6);
   border-radius: 12px;
   border: 1px solid var(--color-borde);
@@ -457,6 +459,7 @@ body {
 
 .cv-avatar-container {
   flex-shrink: 0;
+  position: relative;
 }
 
 .cv-avatar {
@@ -475,9 +478,8 @@ body {
 
 .cv-info-principal {
   flex: 1;
-  min-width: 0; /* Previene desbordamiento en flex items */
+  text-align: left;
 }
-
 
 .cv-info-principal h1 {
   font-size: 2.5rem;
@@ -532,7 +534,6 @@ body {
   gap: 0.75rem;
   margin: 1rem 0;
 }
-
 
 .cv-titulo-badge {
   display: flex;
@@ -592,55 +593,183 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .cv-contenedor {
-    padding: 0.5rem;
-  }
-
-  .cv-perfil {
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem;
-    gap: 1.5rem;
-    text-align: center;
-  }
-
-  .cv-avatar-container {
-    width: 150px;
-  }
-
-  .cv-avatar {
-    width: 150px;
-    height: 150px;
-  }
-
   .cv-titulos {
     justify-content: center;
   }
-
+  
   .cv-titulo-badge {
-    min-width: 150px;
-  }
-
-  .cv-descripcion {
-    font-size: 1rem;
+    flex-basis: calc(50% - 0.75rem);
+    justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
+  .cv-titulo-badge {
+    flex-basis: 100%;
+  }
+}
+
+/* Ajuste para la transición entre secciones */
+.cv-titulo-badge {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Efecto de brillo en hover */
+.cv-titulo-badge::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.cv-titulo-badge:hover::after {
+  opacity: 1;
+}
+
+/* Reset completo para móvil */
+@media (max-width: 768px) {
+  .cv-contenedor {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  .cv-encabezado {
+    margin-bottom: 1rem;
+    padding: 0;
+  }
+
   .cv-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
     padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cv-avatar-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+
+  .cv-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 3px solid var(--color-primario);
+    border-radius: 50%;
+  }
+
+  .cv-info-principal {
+    width: 100%;
+    padding: 0;
   }
 
   .cv-info-principal h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .cv-titulos {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0;
+    margin: 0.5rem 0;
   }
 
   .cv-titulo-badge {
-    min-width: 100%;
-    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    background: rgba(22, 27, 34, 0.8);
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    transform: none;
+    animation: none;
+    position: relative;
+  }
+
+  .cv-titulo-badge:hover {
+    transform: none;
+    background: rgba(35, 134, 54, 0.2);
+  }
+
+  .cv-titulo-emoji {
+    width: 2rem;
+    min-width: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+  }
+
+  .cv-titulo-texto {
+    flex: 1;
+    text-align: left;
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--color-texto);
   }
 
   .cv-descripcion {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    text-align: center;
+    color: var(--color-gris);
+  }
+
+  /* Eliminar cualquier animación o transformación que pueda causar problemas */
+  .cv-titulo-badge, 
+  .cv-titulo-emoji, 
+  .cv-titulo-texto {
+    visibility: visible !important;
+    display: flex !important;
+    opacity: 1 !important;
+    OVERFLOW: hidden;
+  }
+}
+
+/* Ajustes específicos para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  .cv-contenedor {
+    padding: 0.5rem;
+  }
+
+  .cv-titulo-badge {
+    padding: 0.5rem;
+  }
+
+  .cv-titulo-emoji {
+    min-width: 1.75rem;
+    font-size: 1rem;
+  }
+
+  .cv-titulo-texto {
+    font-size: 0.85rem;
   }
 }
