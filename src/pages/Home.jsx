@@ -122,7 +122,9 @@ const Home = () => {
         { emoji: "🎨", nombre: "HTML5/CSS3: Intermedio" },
         { emoji: "🗄️", nombre: "MongoDB: Básico" },
         { emoji: "📊", nombre: "Crystal Reports: Avanzado" },
-        { emoji: "🔧", nombre: "Genexus 18: Intermedio" }
+        { emoji: "🔧", nombre: "Genexus 18: Intermedio" },
+        { emoji: "🚀", nombre: "Vercel" },
+        { emoji: "🖥️", nombre: "Render" }
       ],
       blandas: [
         { emoji: "👥", nombre: "Trabajo en equipo" },
