@@ -123,8 +123,8 @@ const Home = () => {
         { emoji: "🗄️", nombre: "MongoDB: Básico" },
         { emoji: "📊", nombre: "Crystal Reports: Avanzado" },
         { emoji: "🔧", nombre: "Genexus 18: Intermedio" },
-        { emoji: "🚀", nombre: "Vercel" },
-        { emoji: "🖥️", nombre: "Render" }
+        { emoji: "🚀", nombre: "Despliegues en Vercel" },
+        { emoji: "🖥️", nombre: "Despliegues y DB en Render" }
       ],
       blandas: [
         { emoji: "👥", nombre: "Trabajo en equipo" },
