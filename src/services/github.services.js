@@ -49,6 +49,8 @@ export const githubServicio = {
       const repositorios = await Promise.all(
         data.map(async (repo) => {
           let readme = null;
+          let paginaDespliegue = null;
+
           try {
             const readmeResponse = await clienteGithub.get(
               `/repos/${nombreUsuario}/${repo.name}/readme`,
@@ -63,11 +65,23 @@ export const githubServicio = {
             console.log(`No se encontró README para ${repo.name}`);
           }
 
+          try {
+            const pagesResponse = await clienteGithub.get(
+              `/repos/${nombreUsuario}/${repo.name}/pages`
+            );
+            paginaDespliegue = pagesResponse.data.html_url;
+          } catch (error) {
+            if (repo.homepage) {
+              paginaDespliegue = repo.homepage;
+            }
+          }
+
           return {
             id: repo.id,
             nombre: repo.name,
             descripcion: repo.description,
             url: repo.html_url,
+            urlDespliegue: paginaDespliegue,
             tecnologiaPrincipal: repo.language,
             estrellas: repo.stargazers_count,
             forks: repo.forks_count,

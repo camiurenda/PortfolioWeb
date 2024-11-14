@@ -3,7 +3,7 @@ import { useGithub } from '../hooks/useGithub';
 import { configurarToken } from '../services/github.services';
 import ReactMarkdown from 'react-markdown';
 
-const App = () => {
+const Portfolio = () => {
   const nombreUsuario = 'camiurenda';
   const [readmeExpandido, setReadmeExpandido] = useState({});
   
@@ -68,6 +68,17 @@ const App = () => {
                   )}
                   <span title="Estrellas">⭐ {repo.estrellas}</span>
                   <span title="Forks">🍴 {repo.forks}</span>
+                  {repo.urlDespliegue && (
+                    <a 
+                      href={repo.urlDespliegue}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="tarjeta-despliegue"
+                      title="Ver despliegue"
+                    >
+                      🚀 Demo
+                    </a>
+                  )}
                 </div>
 
                 {repo.readme && (
@@ -92,4 +103,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Portfolio;
