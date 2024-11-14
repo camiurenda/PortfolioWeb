@@ -33,7 +33,7 @@ const Home = () => {
         },
         {
           emoji: "⚛️",
-          texto: "Desarrollador Full Stack MERN"
+          texto: "Desarrollador Jr. Full Stack MERN"
         },
         {
           emoji: "🍕",
